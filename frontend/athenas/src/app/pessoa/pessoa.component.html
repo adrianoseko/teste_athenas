@@ -1,0 +1,182 @@
+<p-table #dt1 [value]="pessoas" dataKey="id" [rows]="50" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[50, 100, 150]" [paginator]="true"
+    currentPageReportTemplate="Showing {last} to {first} of {totalRecords} entries"
+    [globalFilterFields]="['pNome', 'pCpf']">
+    <ng-template pTemplate="caption">
+        <div class="flex">
+            <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Pesquisar" />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="pNome" style="min-width:15rem; font-family: Russo One;">
+                Nome
+            </th>
+            <th style="min-width:15rem; font-family: Russo One;">
+                Data
+            </th>
+            <th pSortableColumn="pCpf" style="min-width:15rem; font-family: Russo One;">
+                CPF
+            </th>
+            <th style="min-width:15rem; font-family: Russo One;">
+                Sexo
+            </th>
+            <th style="min-width:15rem ; font-family: Russo One;">
+                Peso
+            </th>
+            <th style="min-width:10rem; font-family: Russo One;">
+                Altura
+            </th>
+            <th style="min-width:35rem">
+                <p-button label="Adicionar Pessoa" (click)="addPessoa()"></p-button>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-pessoa>
+        <tr>
+            <td>
+                {{pessoa.pNome}}
+            </td>
+            <td style="text-align: left;">
+                {{pessoa.pData | date: 'dd/MM/yyyy'}}
+            </td>
+            <td>
+                {{pessoa.pCpf}}
+            </td>
+            <td>
+                {{pessoa.pSexo}}
+            </td>
+            <td>
+                {{pessoa.pPeso}}
+            </td>
+            <td>
+                {{pessoa.pAltura}}
+            </td>
+            <td style="text-align: center;">
+                <p-button icon="pi pi-chart-bar" (click)="calcularPeso(pessoa)"></p-button>
+                <p-button icon="pi pi-pencil" (click)="editPessoa(pessoa)"></p-button>
+                <p-button icon="pi pi-trash" (click)="deletePessoa(pessoa)"></p-button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="7">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="pessoaDialog" [breakpoints]="{ '960px': '75vw' }" [style]="{ width: '50vw' }"
+    header="Adicionar Pessoa" [modal]="true" styleClass="p-fluid">
+    <p-card>
+        <form [formGroup]="pessoaForm">
+            <section class="form-group">
+
+                <div class="field">
+                    <label title="nome" for="nome">Nome</label>
+                    <input type="nome" pInputText id="nome" formControlName="pNome" placeholder="Nome" required />
+
+                </div>
+
+                <div style="margin-top: 1%;">
+                    Nascimento
+                    <p-calendar placeholder="Nascimento" dateFormat="dd/mm/yy" formControlName="pData"
+                        appendTo="body"></p-calendar>
+                </div>
+
+                <div class="field">
+                    <label title="cpf" for="cpf">CPF</label>
+                    <input type="cpf" pInputText id="cpf" formControlName="pCpf" placeholder="CPF" required />
+                </div>
+
+                <div class="field">
+                    <label title="sexo" for="sexo">Sexo</label>
+                    <p-dropdown [options]="sexo" [(ngModel)]="selectedSexo" formControlName="pSexo" optionLabel="name"
+                        [showClear]="true" placeholder="Sexo"></p-dropdown>
+
+                </div>
+
+                <div class="field">
+                    <label title="altura" for="email">Altura</label>
+                    <input type="tipo_email" pInputText id="altura" formControlName="pAltura" placeholder="altura"
+                        required />
+                </div>
+
+                <div class="field">
+                    <label title="peso" for="email">Peso</label>
+                    <input type="peso" pInputText id="peso" formControlName="pPeso" placeholder="peso" required />
+                </div>
+
+            </section>
+
+        </form>
+    </p-card>
+    <ng-template pTemplate="footer" class="flex align-items-center justify-content-between">
+
+        <p-button icon="pi pi-check" (click)="savePessoa(pessoaForm.value)" label="Cadastrar"
+            styleClass="p-button p-button-text btn-pre-cad p-button-lg" [disabled]="!pessoaForm.valid"></p-button>
+
+        <p-button icon="pi pi-times" (click)="hidePreCad()" label="Cancelar"
+            styleClass="p-button p-button-text  p-button-lg btn-cancelar btn-cancelar"></p-button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="editDialog" [breakpoints]="{ '960px': '75vw' }" [style]="{ width: '50vw' }"
+    header="Editar Pessoa" [modal]="true" styleClass="p-fluid">
+    <p-card>
+        <form [formGroup]="pessoaForm">
+            <section class="form-group">
+
+                <div class="field">
+                    <label title="nome" for="nome">Nome</label>
+                    <input type="nome" pInputText id="nome" formControlName="pNome" placeholder="Nome" required />
+
+                </div>
+
+                <div style="margin-top: 1%;">
+                    Nascimento
+                    <p-calendar placeholder="Nascimento" dateFormat="dd/mm/yy" formControlName="pData"
+                        appendTo="body"></p-calendar>
+                </div>
+
+                <div class="field">
+                    <label title="pCpf" for="pCpf">CPF</label>
+                    <input type="pCpf" pInputText id="pCpf" formControlName="pCpf" placeholder="CPF" required />
+                </div>
+
+                <div class="field">
+                    <label title="pSexo" for="pSexo">Sexo</label>
+                    <p-dropdown type="pSexo" id="pSexo" [options]=" sexo" [(ngModel)]="selectedSexo"
+                        formControlName="pSexo" optionLabel="name" [showClear]="true" placeholder="Sexo"></p-dropdown>
+
+                </div>
+
+                <div class="field">
+                    <label title="pAltura" for="pAltura">Altura</label>
+                    <input type="pAltura" pInputText id="pAltura" formControlName="pAltura" placeholder="altura"
+                        required />
+                </div>
+
+                <div class="field">
+                    <label title="pPeso" for="pPeso">Peso</label>
+                    <input type="pPeso" pInputText id="pPeso" formControlName="pPeso" placeholder="peso" required />
+                </div>
+            </section>
+
+        </form>
+    </p-card>
+    <ng-template pTemplate="footer" class="flex align-items-center justify-content-between">
+
+        <p-button icon="pi pi-check" (click)="patchPessoa(pessoaForm.value)" label="Alterar"
+            styleClass="p-button p-button-text btn-pre-cad p-button-lg"></p-button>
+
+        <p-button icon="pi pi-times" (click)="hidePreCad()" label="Cancelar"
+            styleClass="p-button p-button-text  p-button-lg btn-cancelar btn-cancelar"></p-button>
+    </ng-template>
+</p-dialog>
+
+<p-messages></p-messages>

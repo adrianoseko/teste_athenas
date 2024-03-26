@@ -1,0 +1,303 @@
+:host ::ng-deep {
+  .p-paginator {
+    .p-paginator-current {
+      margin-left: auto;
+    }
+  }
+
+  .button-save {
+    background-color: #FF4C00 !important;
+    color: #FFF !important;
+  }
+
+  .btn-cad {
+    background-color: #FF4C00 !important;
+    color: #FFF !important;
+    float: left !important;
+  }
+
+  .btn-pre-cad {
+    background-color: hsl(214, 100%, 50%) !important;
+    color: #FFF !important;
+  }
+
+  .btn-cancelar {
+    background-color: hsl(220, 2%, 72%) !important;
+    color: #000 !important;
+    float: left;
+  }
+
+  .btn-cnpj {
+    margin-left: 3rem;
+    background-color: #FF4C00 !important;
+    color: #FFF !important;
+  }
+
+  .btn-instituicao {
+    background-color: #FF0000 !important;
+    color: #FFF !important;
+    font-weight: bold;
+  }
+
+  .btn-back {
+    background-color: #000000 !important;
+    color: #FFF !important;
+    font-weight: bold;
+  }
+
+
+
+  .p-progressbar {
+    height: .5rem;
+    background-color: #D8DADC;
+
+    .p-progressbar-value {
+      background-color: #607D8B;
+    }
+  }
+
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .p-calendar .p-datepicker {
+    min-width: 25rem;
+
+    td {
+      font-weight: 400;
+    }
+  }
+
+  .p-datatable {
+    table {
+      /* width: auto !important;*/
+    }
+
+    .validate-container {
+
+      h5 {
+        padding: 0.5rem 1rem;
+      }
+
+      .AllStatus {
+        font-size: 14px;
+        padding: 0.5rem 1rem !important;
+        margin-top: 30px;
+      }
+    }
+
+    .p-datatable-thead {
+      tr {
+        th {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          position: sticky;
+          top: 0;
+          z-index: 1;
+        }
+
+        th:nth-child(3) {
+          min-width: 120px;
+          text-align: center;
+        }
+      }
+    }
+
+    .p-datatable-tbody {
+      tr {
+        td:nth-child(2) {
+          text-align: center;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 200px;
+
+          &:hover {
+            white-space: wrap;
+            max-width: 400px;
+          }
+        }
+
+        td:nth-child(3) {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 200px;
+        }
+
+        td:nth-child(4) {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 200px;
+        }
+
+        td:nth-child(5) {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 400px;
+          transition: 1s;
+
+          &:hover {
+            white-space: pre-wrap;
+          }
+        }
+
+        td {
+
+          // &.hover {
+          //     .hint-tooltip {
+
+          //     }
+          // }
+
+          .status {
+            background-color: transparent !important;
+
+            &.true {
+              color: green !important;
+            }
+
+            &.false {
+              color: red !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .p-datatable.p-datatable-customers {
+    .p-datatable-header {
+      padding: 1rem;
+      text-align: left;
+      font-size: 1.5rem;
+    }
+
+    .p-paginator {
+      padding: 1rem;
+    }
+
+    .p-datatable-thead>tr>th {
+      text-align: left;
+    }
+
+    .p-datatable-tbody>tr>td {
+      cursor: auto;
+    }
+
+    .p-dropdown-label:not(.p-placeholder) {
+      text-transform: uppercase;
+    }
+  }
+
+  /* Responsive */
+  .p-datatable-customers .p-datatable-tbody>tr>td .p-column-title {
+    display: none;
+  }
+
+  .p-fluid {
+    .field {
+      .formgrid {
+        .field {
+          label {
+            max-width: 260px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+  }
+}
+
+.card {
+  margin-left: 13%;
+}
+
+::ng-deep label {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+}
+
+::ng-deep input {
+  display: block;
+}
+
+::ng-deep.p-fluid .p-inputtext {
+  width: 100%;
+}
+
+@media screen and (max-width: 960px) {
+  :host ::ng-deep {
+    .p-datatable {
+      &.p-datatable-customers {
+
+        .p-datatable-thead>tr>th,
+        .p-datatable-tfoot>tr>td {
+          display: none !important;
+        }
+
+        .card {
+          display: none !important;
+        }
+
+        .p-datatable-tbody>tr {
+          border-bottom: 1px solid var(--layer-2);
+
+          >td {
+            text-align: left;
+            display: block;
+            border: 0 none !important;
+            width: 100% !important;
+            float: left;
+            clear: left;
+            border: 0 none;
+
+            .p-column-title {
+              padding: .4rem;
+              min-width: 30%;
+              display: inline-block;
+              margin: -.4rem 1rem -.4rem -.4rem;
+              font-weight: bold;
+            }
+
+            .p-progressbar {
+              margin-top: .5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+.cnpj {
+  margin-left: 34%;
+  min-height: 450px;
+
+  .empresa {
+    margin-left: 0.8%;
+  }
+
+}
+
+.mensagem {
+  color: red;
+  font-size: 12px;
+}
+
+::ng-deep.md\:col-4 {
+  width: 90%;
+}
+
+agm-map {
+  height: 300px;
+}
+
+@import "primeicons/primeicons.css";
